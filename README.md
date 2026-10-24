@@ -19,7 +19,7 @@ Kali 上执行 `Fastjson-1.2.83-RCE-NO-CVE/poc.py` 的实际输出（目标主�
 |---|---|---|
 | `Fastjson-1.2.24-Deserialization-CVE-2017-18349` | Fastjson 1.2.24 autoType 反序列化 | JNDI 外连回调（不加载远程类） |
 | `Fastjson-1.2.83-RCE-NO-CVE` | Fastjson 1.2.68~1.2.83 jar: 协议 RCE（无 CVE 编号） | 托管探测服务，观察目标是否拉取 JAR |
-| `Log4j-2.8.1-Deserialization-CVE-2017-5645` | Log4j 2.x < 2.8.2 未认证反序列化（**仅验证利用面**） | 唯一标记 + 服务端日志比对 |
+| `Log4j-2.8.1-Deserialization-CVE-2017-5645` | Log4j 2.x < 2.8.2 未认证反序列化（**仅验证利用面**，⚠️ 已弃用） | 唯一标记 + 服务端日志比对 |
 
 ## 目录命名规范
 
