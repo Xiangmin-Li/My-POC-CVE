@@ -7,6 +7,12 @@
 
 目标：看到目录名就知道验的是什么，进目录就能跑，输出能直接贴进报告。
 
+## 运行效果
+
+Kali 上执行 `Fastjson-1.2.83-RCE-NO-CVE/poc.py` 的实际输出（目标主动回连 38 次，判定 VULNERABLE）：
+
+![运行效果](Fastjson-1.2.83-RCE-NO-CVE/demo.png)
+
 ## 已有 PoC
 
 | 目录 | 漏洞 | 验证方式 |
