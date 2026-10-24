@@ -12,6 +12,7 @@
 | 目录 | 漏洞 | 验证方式 |
 |---|---|---|
 | `Fastjson-1.2.24-Deserialization-CVE-2017-18349` | Fastjson 1.2.24 autoType 反序列化 | JNDI 外连回调（不加载远程类） |
+| `Fastjson-1.2.47-Deserialization-NO-CVE` | Fastjson 1.2.25~1.2.47 autoType 白名单绕过（无 CVE 编号） | 两段式 payload + JNDI 外连回调 |
 
 ## 目录命名规范
 
