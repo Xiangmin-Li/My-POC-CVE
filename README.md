@@ -22,6 +22,7 @@ Kali 上执行 `Fastjson-1.2.83-RCE-NO-CVE/poc.py` 的实际输出（目标主�
 | `Log4j-2.8.1-Deserialization-CVE-2017-5645` | Log4j 2.x < 2.8.2 未认证反序列化（**仅验证利用面**，⚠️ 已弃用） | 唯一标记 + 服务端日志比对 |
 | `Log4j2-2.14.1-JNDI-CVE-2021-44228` | Log4j2 Log4Shell JNDI 注入 | JNDI 外连回调（不实现 LDAP 服务） |
 | `Shiro-1.2.4-RCE-CVE-2016-4437` | Shiro rememberMe 硬编码密钥 | 默认密钥差分（合法空身份，不投递 gadget） |
+| `Shiro-1.5.1-AuthBypass-CVE-2020-1957` | Shiro 认证绕过（分号路径参数） | 路径差分（受保护路径 vs `..;` 绕过） |
 
 ## 目录命名规范
 
