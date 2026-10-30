@@ -3,7 +3,7 @@
 > ⚠️ **本项目所有脚本仅用于 PoC 验证**：在自有系统或已获得书面授权的目标上，确认漏洞是否真实存在。
 > 禁止用于任何未授权攻击、批量化利用或武器化改造。使用前请先阅读文末免责声明。
 
-漏洞 PoC 验证脚本集合。每个漏洞一个独立目录，目录名即索引；**全部零依赖**，只用 Python 标准库，clone 下来直接能跑。
+漏洞 PoC 验证脚本集合。每个漏洞一个独立目录，目录名即索引；**零依赖**，clone 下来直接能跑。网络类用 Python 标准库，内核/本地类用 C（`gcc` 现编，不引第三方库）。
 
 目标：看到目录名就知道验的是什么，进目录就能跑，输出能直接贴进报告。
 
@@ -43,6 +43,7 @@ Kali 上执行 `Fastjson-1.2.83-RCE-NO-CVE/poc.py` 的实际输出（目标主�
 | `Shiro-1.5.1-AuthBypass-CVE-2020-1957` | Shiro 认证绕过（分号路径参数） | 路径差分（受保护路径 vs `..;` 绕过） |
 | `Struts2-2.3.30-RCE-CVE-2017-5638` | Struts2 S2-045 OGNL 注入（Content-Type） | 响应头回显乘法结果（不执行命令） |
 | `Zabbix-3.0.3-CommandInjection-CVE-2017-2824` | Zabbix Server trapper 参数注入 → 命令执行 | 注入 `id`，trapper 响应回显 `uid=`（只读命令） |
+| `Linux-Kernel-5.7_to_7.2.7-LPE-CVE-2026-98260` | Linux 内核 exec/POSIX-timer 释放后使用 | 非 leader 线程 exec 失败路径（⚠️ 仅触发路径已验证，UAF 未在现场复现） |
 
 ## 目录命名规范
 
@@ -76,12 +77,16 @@ Kali 上执行 `Fastjson-1.2.83-RCE-NO-CVE/poc.py` 的实际输出（目标主�
 | `FileUpload` | 任意文件上传 |
 | `InfoLeak` | 信息泄露 |
 | `CommandInjection` | 命令注入 |
+| `LPE` | 本地提权（内核/系统本地漏洞） |
 
 ## 单个目录结构
 
 ```text
 <框架>-<版本>-<漏洞类型>-<CVE编号>/
-├── poc.py       # 验证脚本，零依赖，单文件
+├── poc.py       # 网络类：验证脚本，零依赖，单文件
+├── poc.c        # 内核/本地类：C 源码
+├── build.sh     # 内核/本地类：编译脚本（gcc，不引第三方库）
+├── run-vm.sh    # 内核/本地类：可选，在 qemu 里跑，别拿自己的机器试
 └── README.md    # 漏洞说明、用法、预期输出、修复建议、验证记录
 ```
 
@@ -91,7 +96,7 @@ Kali 上执行 `Fastjson-1.2.83-RCE-NO-CVE/poc.py` 的实际输出（目标主�
 
 | 项 | 约定 |
 |---|---|
-| 依赖 | **零依赖**，只用 Python 标准库（`urllib` 而非 `requests`） |
+| 依赖 | **零依赖**。网络类只用 Python 标准库（`urllib` 而非 `requests`）；内核/本地类只用 libc |
 | Python | 3.8+ |
 | 参数 | `-u/--url` 必填；`-t/--timeout`；`--proxy`；`-k` |
 | 退出码 | `0` 存在 / `1` 不存在 / `2` 参数或网络错误 |
